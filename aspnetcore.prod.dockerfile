@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/dotnet/core/aspnet
 ENV ASPNETCORE_URLS=http://+:5000
 WORKDIR /var/www/aspnetcoreapp
 COPY --from=build /var/www/aspnetcoreapp/out ./
-ENTRYPOINT ["dotnet", "AspNetCorePostgreSQLDockerApp.dll"]
+ENTRYPOINT ["dotnet", "TimPortfolioApp.dll"]
 
 
 

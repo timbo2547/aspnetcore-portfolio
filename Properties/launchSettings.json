@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AspNetCorePostgreSQLDockerApp": {
+    "TimPortfolioApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://0.0.0.0:5000",
