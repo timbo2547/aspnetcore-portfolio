@@ -25,6 +25,10 @@ body {
   background-color: (255, 255, 255, 0.02)!important;
 }
 
+.nav-icon {
+    color: #e78533;
+}
+
 .navbar-brand {
   font-size: 1.75rem;
 }
@@ -45,7 +49,7 @@ body {
 
 .center-center {
   display: grid;
-  place-content: center;
+  place-content: left;
   gap: 1ch;
 }
 
