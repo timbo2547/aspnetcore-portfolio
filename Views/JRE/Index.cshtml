@@ -8,11 +8,21 @@
     ViewData["Title"] = "JRE Show";
 }
 
+@foreach (var movie in Model)
+{
+    <article class="media content-section">
+        <div class="media-body">
+            <h3><a class="article-title" href=@movie.Url>@movie.Title</a></h3>
+            <image class="article-image" width="300" height="300" src=@movie.ImageUrl></image>
+            <audio class="article-audio" controls>
+                <source src=@movie.Url type="audio/mpeg"></source>
+            </audio>
+            <p class="article-content">@movie.Description</p>
+        </div>
+    </article>
+}
 
-
-
-
-<table id="movies" class="table table-bordered table-hover">
+@* <table id="movies" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Title</th>
@@ -29,4 +39,4 @@
                 </tr>
             }
         </tbody>
-</table>
+</table> *@
