@@ -32,7 +32,7 @@ namespace AspNetCorePostgreSQLDockerApp
             //Add PostgreSQL support
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<PostgresDbContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnectionString")));
+                    options.UseNpgsql(Configuration.GetConnectionString("DockerConnectionString")));
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();

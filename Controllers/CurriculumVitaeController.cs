@@ -14,7 +14,7 @@ namespace TimPortfolioApp.Controllers
         public IActionResult Index()
         {
             string filePath = "~/docs/cv.pdf";
-            Response.Headers.Add("Content-Disposition", "inline; filename=cv.pdf");
+            Response.Headers.Add("Content-Disposition", "inline; filename=timothy_luna_cv.pdf");
             return File(filePath, "application/pdf");
         }
     }
