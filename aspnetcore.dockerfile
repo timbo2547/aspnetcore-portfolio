@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/dotnet/core/sdk
 
 LABEL author="TL"
 
-ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_URLS=http://+:80
 
 WORKDIR /var/www/aspnetcoreapp
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 80
 
 ENTRYPOINT ["/bin/bash", "-c", "dotnet restore && dotnet run"]
 
