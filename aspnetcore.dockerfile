@@ -3,13 +3,13 @@ RUN dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 ENV PATH="$PATH:/root/.dotnet/tools"
 LABEL author="TL"
 
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:5000
 
 WORKDIR /var/www/aspnetcoreapp
 
 COPY . .
 
-EXPOSE 80
+EXPOSE 5000
 RUN libman restore
 ENTRYPOINT ["/bin/bash", "-c", "dotnet restore && dotnet run"]
 
