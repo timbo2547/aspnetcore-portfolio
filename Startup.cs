@@ -35,7 +35,7 @@ namespace AspNetCorePostgreSQLDockerApp
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnectionString")));
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllersWithViews();
+            services.AddMvc();
 
             // https://stackoverflow.com/questions/59199593/net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported
             services.AddControllers().AddNewtonsoftJson(options =>

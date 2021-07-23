@@ -6,7 +6,6 @@ dist
 .vscode
 
 .idea
-
 #remove generated files
 **/wwwroot/app/**/*.js
 **/wwwroot/app/**/*.map
