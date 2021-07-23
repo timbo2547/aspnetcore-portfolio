@@ -12,31 +12,11 @@
 {
     <article class="media content-section">
         <div class="media-body">
-            <h3><a class="article-title" href=@movie.Url>@movie.Title</a></h3>
-            <image class="article-image" width="300" height="300" src=@movie.ImageUrl></image>
-            <audio class="article-audio" controls>
-                <source src=@movie.Url type="audio/mpeg"></source>
-            </audio>
-            <p class="article-content">@movie.Description</p>
+            <h3><a class="article-title" href=@movie.Url>@movie.Title</a></h3>         
+            <img src=@movie.ImageUrl height="300" width="300" alt=@movie.Title />
+            <p class="article-content">
+                @movie.Description
+            </p>
         </div>
     </article>
 }
-
-@* <table id="movies" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-
-    <tbody>
-            @foreach (var movie in Model)
-            {
-                <tr>
-                    <td>@movie.Title</td>
-                    <td><a href=@movie.Url>Link</a></td>
-                </tr>
-            }
-        </tbody>
-</table> *@
