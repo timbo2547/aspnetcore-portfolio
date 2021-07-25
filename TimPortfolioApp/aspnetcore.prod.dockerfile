@@ -3,15 +3,13 @@ RUN dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 ENV PATH="$PATH:/root/.dotnet/tools"
 WORKDIR /var/www/aspnetcoreapp
 
-
-
 # copy csproj and restore as distinct layers
 COPY ./*.csproj ./
-RUN libman restore
 RUN dotnet restore
 
 # copy everything else and build app
 COPY ./ ./
+RUN libman restore
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet
