@@ -4,6 +4,10 @@ namespace TimPortfolioApp.Models
 {
     public class Category
     {
+        public Category()
+        {
+            SampleItems = new List<SampleItem>();
+        }
         public int Id { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
