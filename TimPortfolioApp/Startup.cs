@@ -1,12 +1,17 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TimPortfolioApp.Models;
 using TimPortfolioApp.Repository;
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+using TimPortfolioApp.Utilities;
 
 namespace TimPortfolioApp
 {
@@ -32,6 +37,18 @@ namespace TimPortfolioApp
 
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc();
+            
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<PostgresDbContext>()
+                .AddSignInManager()
+                .AddDefaultTokenProviders();
+            
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            }).AddIdentityCookies(o => { });
 
             // https://stackoverflow.com/questions/59199593/net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -44,6 +61,7 @@ namespace TimPortfolioApp
 
             //Transient: Created each time they're needed
             services.AddTransient<SampleItemDbSeeder>();
+            services.AddTransient<DatabaseMigrate>();
 
             services.AddSwaggerGen(options =>
             {
@@ -84,12 +102,13 @@ namespace TimPortfolioApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SampleItemDbSeeder sampleItemDbSeeder) 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SampleItemDbSeeder sampleItemDbSeeder, DatabaseMigrate dbMigrate) 
             // TODO: Add seed parameters: DockerCommandsDbSeeder dockerCommandsDbSeeder, CustomersDbSeeder customersDbSeeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -134,8 +153,11 @@ namespace TimPortfolioApp
                 //endpoints.MapFallbackToController("Index", "Customers");
             });
 
-            // TODO: Add seeding here:
-            sampleItemDbSeeder.SeedAsync(app.ApplicationServices).Wait();
+            // Use seeding for early development, drop database before 
+            //sampleItemDbSeeder.SeedAsync(app.ApplicationServices).Wait();
+            
+            // Use migrations for production
+            dbMigrate.ApplyMigrationsAsync(app.ApplicationServices).Wait();
         }
     }
 }
