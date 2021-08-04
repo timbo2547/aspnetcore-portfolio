@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using TimPortfolioApp.Models;
 using TimPortfolioApp.Repository;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+using TimPortfolioApp.Services;
 using TimPortfolioApp.Utilities;
 
 namespace TimPortfolioApp
@@ -62,6 +63,8 @@ namespace TimPortfolioApp
             //Transient: Created each time they're needed
             services.AddTransient<SampleItemDbSeeder>();
             services.AddTransient<DatabaseMigrate>();
+            services.AddTransient<IEmailSender, MessageServices.AuthMessageSender>();
+            services.AddTransient<ISmsSender, MessageServices.AuthMessageSender>();
 
             services.AddSwaggerGen(options =>
             {
@@ -116,14 +119,10 @@ namespace TimPortfolioApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            // TODO: Review this
+            
             app.UseCors("AllowAllPolicy");
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            // TODO: What is this?
             app.UseSpaStaticFiles();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
@@ -138,6 +137,7 @@ namespace TimPortfolioApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

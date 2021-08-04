@@ -1,4 +1,6 @@
-﻿namespace TimPortfolioApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TimPortfolioApp.Models
 {
     public class SampleItem
     {
