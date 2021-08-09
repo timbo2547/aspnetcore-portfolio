@@ -50,16 +50,6 @@ namespace TimPortfolioApp.Repository
                 Category = category
             };
 
-            //if (sampleItem.Category.CategoryId != null)
-            //{
-            //    newSampleItem.CategoryId = sampleItem.Category.CategoryId.Value;
-            //}
-            //else // attach by category name
-            //{
-            //    var cat = await _context.Categories.SingleOrDefaultAsync(c => c.CategoryName == sampleItem.Category.CategoryName);
-            //    newSampleItem.Category = cat;
-            //}
-
             _context.Add(newSampleItem);
             try
             {

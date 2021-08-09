@@ -32,6 +32,11 @@ namespace TimPortfolioApp.Repository
                     {
 
                     }
+
+                    // if (!await db.AspNetUsers.AnyAsync())
+                    // {
+                    //     
+                    // }
                 }
             }
         }
