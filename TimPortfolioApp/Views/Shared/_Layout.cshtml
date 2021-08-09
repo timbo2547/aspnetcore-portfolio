@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark nav-shadow">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark bg-dark nav-shadow">
             <div class="container nav-transition">
                 @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LT</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -57,23 +57,22 @@
                         </li>*@
                     </ul>
                     <ul class="navbar-nav">
-
                         <li class="nav-item">
                             <a class="nav-link" href="https://github.com/timbo2547/">
                                 <span class="nav-icon"><i class="fa fa-github"></i></span>
                                 @*<span class="nav-icon-label">Github</span>*@
                             </a>
                         </li>
-                        <li class="nav-item pr-4">
+                        <li class="nav-item">
                             <a class="nav-link" href="https://www.linkedin.com/in/tim-luna-a2074b14/">
                                 <span class="nav-icon"><i class="fa fa-linkedin"></i></span>
                                 @*<span class="nav-icon-label">Linkedin</span>*@
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item pr-4">
                             <a class="nav-link" href="@(Url.Content("~/swagger"))">
                                 <span class="nav-icon"><i class="fa fa-database"></i></span>
-                                <span class="nav-icon-label">API</span>
+                                @* <span class="nav-icon-label">API</span> *@
                             </a>
                         </li>
                     </ul>
