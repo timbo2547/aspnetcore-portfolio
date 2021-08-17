@@ -6,6 +6,8 @@ namespace TimPortfolioApp.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        [PersonalData]
+        public string Name { get; set; }
         // public override string Id { get; set; }
         // public override string UserName { get; set; }
     }

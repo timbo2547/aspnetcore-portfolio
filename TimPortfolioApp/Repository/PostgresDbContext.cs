@@ -15,8 +15,6 @@ namespace TimPortfolioApp.Repository
         // add db models
         public DbSet<SampleItem> SampleItems { get; set; }
         public DbSet<Category> Categories { get; set; }
-        //public DbSet<ApplicationUser> AspNetUsers { get; set; }
-
         public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options) { }
         
         protected override void OnModelCreating(ModelBuilder builder)

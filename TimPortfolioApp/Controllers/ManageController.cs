@@ -46,6 +46,7 @@ namespace TimPortfolioApp.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ProfileUpdateSuccess ? "Your profile has been updated."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -223,13 +224,54 @@ namespace TimPortfolioApp.Controllers
         }
 
         //
+        // GET: /Manage/UpdateProfile
+        [HttpGet]
+        public IActionResult UpdateProfile()
+        {
+            return View();
+        }
+        
+        //
+        // POST: /Manage/UpdateProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                if (!string.IsNullOrWhiteSpace(model.Name))
+                    user.Name = model.Name;
+                else
+                    ModelState.AddModelError("", "Email cannot be empty");
+
+                var res = await _userManager.UpdateAsync(user);
+                if (res.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their profile successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ProfileUpdateSuccess });
+                }
+                
+                AddErrors(res);
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            
+        }
+        
+        //
         // GET: /Manage/ChangePassword
         [HttpGet]
         public IActionResult ChangePassword()
         {
             return View();
         }
-
+        
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
@@ -366,6 +408,7 @@ namespace TimPortfolioApp.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ProfileUpdateSuccess,
             Error
         }
 
